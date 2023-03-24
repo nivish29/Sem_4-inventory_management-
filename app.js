@@ -6,8 +6,10 @@ const dotenv = require("dotenv");
 const userRouter = require("./user/userRoute");
 const productRouter = require("./product/productRoute");
 const supplierRouter = require("./supplier/supplierRoute");
-
+const cors = require("cors");
 dotenv.config({ path: "./config.env" });
+
+app.use(cors());
 
 const port = 8001;
 
