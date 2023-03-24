@@ -6,8 +6,8 @@ exports.getAllProducts = (req, res) => {
       console.log(err);
       return;
     }
-    return res.status(200).json({
-      data: results,}
+    return res.status(200).json(
+      results
     );
   });
 };
