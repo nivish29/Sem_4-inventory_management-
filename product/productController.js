@@ -7,8 +7,7 @@ exports.getAllProducts = (req, res) => {
       return;
     }
     return res.status(200).json({
-      success: 1,
-      data: results,
-    });
+      data: results,}
+    );
   });
 };
