@@ -8,16 +8,21 @@ exports.checktoken = async (req, res, next) => {
       req.headers.authorization.startsWith("Bearer")
     ) {
       token = req.headers.authorization.split(" ")[1];
-      verify(token, "qwerty123", (err, decoded) => {
-        if (err) {
-          res.status(400).json({
-            success: false,
-            message: "Invalid Token",
-          });
-        } else {
-          next();
-        }
-      });
+      if (token) {
+        verify(token, "qwerty123", (err, decodedToken) => {
+          if (err) {
+            res.status(400).json({
+              success: false,
+              message: "Invalid Token",
+            });
+          } else {
+            // console.log(decodedToken);
+            // console.log(decodedToken.result.user_id);
+            req.decodedToken = decodedToken;
+            next();
+          }
+        });
+      }
     }
     // console.log(token);
     if (!token) {
