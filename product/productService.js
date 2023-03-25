@@ -36,3 +36,16 @@ exports.createProd = (data, id, callback) => {
     }
   );
 };
+
+exports.searchProduct = (name, callback) => {
+  pool.query(
+    `select * from PRODUCT where product_name like '%${name}%'`,
+    [name],
+    (error, results, fields) => {
+      if (error) {
+        return callback(error);
+      }
+      return callback(null, results);
+    }
+  );
+};

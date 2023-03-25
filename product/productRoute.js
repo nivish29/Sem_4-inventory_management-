@@ -5,5 +5,10 @@ const router = express.Router();
 
 router.get("/", token_validation.checktoken, productController.getAllProducts);
 router.post("/", token_validation.checktoken, productController.addProduct);
+router.get(
+  "/search-product",
+  token_validation.checktoken,
+  productController.searchAnyProduct
+);
 
 module.exports = router;

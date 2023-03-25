@@ -29,9 +29,10 @@ exports.createSupplier = (req, res) => {
     });
   });
 };
-exports.getSupplierBySupplierId = (req, res) => {
-  const id = req.params.id;
-  getSupplierById(id, (err, results) => {
+exports.getSupplierBySupplierName = (req, res) => {
+  const name = req.query.supplier_name;
+  console.log(name);
+  getSupplierById(name, (err, results) => {
     if (err) {
       console.log(err);
       return;

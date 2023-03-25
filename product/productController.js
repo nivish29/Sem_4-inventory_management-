@@ -1,4 +1,4 @@
-const { getProducts, createProd } = require("./productService");
+const { getProducts, createProd, searchProduct } = require("./productService");
 
 exports.getAllProducts = async (req, res) => {
   try {
@@ -25,6 +25,24 @@ exports.addProduct = (req, res) => {
   const id = req.decodedToken.result.user_id;
   console.log(id);
   createProd(body, id, (err, results) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: 0,
+        message: "Database connection error",
+      });
+    }
+    return res.status(200).json({
+      success: 1,
+      data: results,
+    });
+  });
+};
+
+exports.searchAnyProduct = async (req, res) => {
+  const name = req.query.product_name;
+  console.log(name);
+  searchProduct(name, (err, results) => {
     if (err) {
       console.log(err);
       return res.status(500).json({
