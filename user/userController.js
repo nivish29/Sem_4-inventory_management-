@@ -21,9 +21,12 @@ exports.createUser = (req, res) => {
         message: "Database connection error",
       });
     }
+    const jsontoken = sign({ result: results }, "qwerty123", {
+      expiresIn: "1h",
+    });
     return res.status(200).json({
       success: 1,
-      data: results,
+      data: jsontoken,
     });
   });
 };
@@ -88,6 +91,7 @@ exports.login = (req, res) => {
       return res.json({
         success: 0,
         data: "invalid user_id or password",
+        token: "null",
       });
     }
   });

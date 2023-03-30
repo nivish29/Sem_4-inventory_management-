@@ -49,3 +49,16 @@ exports.searchProduct = (name, callback) => {
     }
   );
 };
+
+exports.updateProduct = (data, callback) => {
+  pool.query(
+    `UPDATE PRODUCT SET PRESENT_QUANTITY = PRESENT_QUANTITY+(SELECT o.QUANTITY FROM ORDERS as o where o.ORDER_ID=?) WHERE PRODUCT_ID=?`,
+    [data.ORDER_ID, data.PRODUCT_ID],
+    (error, results, fields) => {
+      if (error) {
+        return callback(error);
+      }
+      return callback(null, results);
+    }
+  );
+};

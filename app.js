@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const userRouter = require("./user/userRoute");
 const productRouter = require("./product/productRoute");
 const supplierRouter = require("./supplier/supplierRoute");
+const orderRoute = require("./order/orderRoute");
 const cors = require("cors");
 dotenv.config({ path: "./config.env" });
 
@@ -18,6 +19,7 @@ app.use(express.json()); // using this middleware to convert the json object int
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/supplier", supplierRouter);
+app.use("/api/order", orderRoute);
 
 app.get("/", (req, res) => {
   res.send({

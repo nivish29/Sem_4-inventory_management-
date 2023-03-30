@@ -10,5 +10,6 @@ router.get(
   token_validation.checktoken,
   productController.searchAnyProduct
 );
+router.patch("/update-product", productController.updateafter);
 
 module.exports = router;
