@@ -1,12 +1,16 @@
 const pool = require("./../database");
 
-exports.getProducts = (callback) => {
-  pool.query(`select * from PRODUCT`, [], (error, results, fields) => {
-    if (error) {
-      return callback(error);
+exports.getProducts = (id, callback) => {
+  pool.query(
+    `select * from PRODUCT where USER_ID =?`,
+    [id],
+    (error, results, fields) => {
+      if (error) {
+        return callback(error);
+      }
+      return callback(null, results);
     }
-    return callback(null, results);
-  });
+  );
 };
 
 exports.createProd = (data, id, callback) => {
@@ -28,6 +32,19 @@ exports.createProd = (data, id, callback) => {
       data.SELLING_PRICE,
       id,
     ],
+    (error, results, fields) => {
+      if (error) {
+        return callback(error);
+      }
+      return callback(null, results);
+    }
+  );
+};
+
+exports.deleteProd = (id, callback) => {
+  pool.query(
+    `delete from PRODUCT where product_id=?`,
+    [id],
     (error, results, fields) => {
       if (error) {
         return callback(error);

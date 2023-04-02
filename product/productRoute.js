@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get("/", token_validation.checktoken, productController.getAllProducts);
 router.post("/", token_validation.checktoken, productController.addProduct);
+router.get("/delete/:id", productController.deleteProduct);
 router.get(
   "/search-product",
   token_validation.checktoken,
